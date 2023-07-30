@@ -47,7 +47,7 @@ router
   .get(async (req, res) => {
     try {
       const { id } = req.params
-      const user = await User.findById(id)
+      const user = await User.findById(id).populate('Posts')
       if (!user) throw new Error("No user found with that id")
       res.status(200).json({ user })
     } catch (err) {

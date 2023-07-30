@@ -16,6 +16,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/users', userRoutes)
 app.use('/posts', postRoutes)
 
+app.use((err, req, res, next) => {
+  res.json({
+    message: err.message
+  })
+})
+
 mongoose.connect(CON_STR, { useUnifiedTopology: true, useNewUrlParser: true })
 mongoose.connection.on('open', () => console.log('server is connected'))
 mongoose.connection.on('error', (err) => console.log(err))

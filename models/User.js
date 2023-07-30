@@ -23,9 +23,15 @@ const UserSchema = new mongoose.Schema({
     default: 'user'
   }
 }, {
-  timestamps: true
+  timestamps: true, toJSON: { virtuals: true },
+  toObject: { virtuals: true }
 })
 
+UserSchema.virtual('Posts', {
+  ref: 'Posts',
+  foreignField: 'user',
+  localField: '_id'
+})
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next()
   const salt = await bcrypt.genSalt(10);
