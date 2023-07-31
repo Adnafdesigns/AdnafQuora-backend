@@ -11,7 +11,8 @@ const PostSchema = new mongoose.Schema({
     required: [true, 'please enter your content']
   },
   category: [],
-  likes: [],
+  upVotes: [],
+  downVotes: [],
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
